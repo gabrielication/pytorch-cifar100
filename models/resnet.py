@@ -79,7 +79,8 @@ class BottleNeck(nn.Module):
 
 class ResNet(nn.Module):
 
-    def __init__(self, block, num_block, num_classes=100):
+    #CIFAR100 with coarse labels has 20 superclasses, not 100 anymore
+    def __init__(self, block, num_block, num_classes=20):
         super().__init__()
 
         self.in_channels = 64

@@ -30,8 +30,9 @@ def train(epoch):
 
     start = time.time()
     net.train()
-    for batch_index, (images, labels) in enumerate(cifar100_training_loader):
-
+    for batch_index, (images, fine_labels, coarse_labels) in enumerate(cifar100_training_loader):
+        labels = coarse_labels
+        
         if args.gpu:
             labels = labels.cuda()
             images = images.cuda()
@@ -83,8 +84,10 @@ def eval_training(epoch=0, tb=True):
     test_loss = 0.0 # cost function error
     correct = 0.0
 
-    for (images, labels) in cifar100_test_loader:
+    for (images, fine_labels, coarse_labels) in cifar100_test_loader:
 
+        labels = coarse_labels
+        
         if args.gpu:
             images = images.cuda()
             labels = labels.cuda()
